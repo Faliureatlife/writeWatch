@@ -1,37 +1,300 @@
-Listening for events on /home/bob/coding/writeWatchIN_CLOSE_WRITE
-/home/bob/coding/writeWatch/n4913 [file]
-
-IN_MOVED_FROM
-/home/bob/coding/writeWatch/nmain.c [file]
-
-IN_MOVED_TO
-/home/bob/coding/writeWatch/nmain.z~ [file]
-
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
 IN_CLOSE_WRITE
-/home/bob/coding/writeWatch/nmain.c [file]
+src/nmain.c [file]
 
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
 IN_CLOSE_WRITE
-/home/bob/coding/writeWatch/n4913 [file]
+src/nmain.c [file]
 
-IN_MOVED_FROM
-/home/bob/coding/writeWatch/nmain.c [file]
-
-IN_MOVED_TO
-/home/bob/coding/writeWatch/nmain.z~ [file]
-
-IN_CLOSE_WRITE
-/home/bob/coding/writeWatch/nmain.c [file]
-
-IN_CLOSE_WRITE
-/home/bob/coding/writeWatch/n4913 [file]
-
-IN_MOVED_FROM
-/home/bob/coding/writeWatch/nmain.c [file]
-
-IN_MOVED_TO
-/home/bob/coding/writeWatch/nmain.z~ [file]
-
-IN_CLOSE_WRITE
-/home/bob/coding/writeWatch/nmain.c [file]
-
-Exiting program 
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]
+IN_CLOSE
+src/n [directory]

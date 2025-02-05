@@ -1,22 +1,9 @@
-#include "opts.c"
+#include <sys/wait.h>
 
-
-//stdout held in STDOUT_FILENO
-//returns old stdout
-int redirect_output(FILE* new_location){
-  int old_std = dup(STDOUT_FILENO);
-
-  //fileno gives file descriptor of stream
-  dup2(fileno(new_location),STDOUT_FILENO);
-
-  return old_std;
-}
-
-void run_comm(const char * comm, FILE* location){
-    pid_t pid = fork();
+int run_comm(const char* comm, FILE* location){
+  pid_t pid = fork();
   if (pid == 0) {
     FILE* output;
-
        // output = freopen(location ,"w", stdout);
 
     if (output == NULL){
@@ -30,7 +17,7 @@ void run_comm(const char * comm, FILE* location){
     exit(EXIT_FAILURE);
   } else {
     int status;
-    waidpid(pid, &status, 0);
+    waitpid(pid, &status, 0);
 
     if (WIFEXITED(status)) {
       return WEXITSTATUS(status);
