@@ -31,38 +31,10 @@ int main(int argc, char *argv[]){
   wd = calloc(argc, sizeof(int));
   if (wd == NULL) {perror("Init error; calloc"); exit(EXIT_FAILURE);}
 
-  // *wd?
+  //for some reason I'm unsure about using &
   init_inotify(&argc, argv, &fd, &wd, &nfds, &fds);
   printf("Listening for events on %s\nPress enter to stop watching \n\n", argv[1]);
   //create file descriptor and ensure successful creation
-//fd = inotify_init1(IN_NONBLOCK);
-//if (fd == -1) {perror("Init error; inotify_inti1"); exit(EXIT_FAILURE);}
-
-
-////add directories into the watch list
-////we are watching for file close and for file modify
-//for (i = 1; i < argc; i++) {
-//  //IN_MODIFY doesnt seem to really work for VIM
-//  wd[i] = inotify_add_watch(fd, argv[i], IN_CLOSE | IN_MOVE);
-//  //ensure add success
-//  if(wd[i] == -1) {
-//    perror("unable to add one or more files to watch");
-//    exit(EXIT_FAILURE);
-//  }
-//}
-
-////rewrite to only bother reading the first into file
-//
-////basically just a long int for some safety
-//nfds = 2;
-
-//fds[0].fd = STDIN_FILENO;
-//fds[0].events = POLLIN;
-
-//fds[1].fd = fd;
-//fds[1].events = POLLIN;
-
-//printf("Listening for events on %s\n", argv[1]);
   
   //loop section 
   for(;;) {
@@ -77,7 +49,7 @@ int main(int argc, char *argv[]){
     } 
 
     if (poll_num > 0) {
-      //if there is something that has happened (revents = 1) then we call the event handler
+      //if there is something that has happened (revents != 0) then we call the event handler
       if (fds[0].revents & POLLIN) {
         while (read(STDIN_FILENO, &buf, 1) > 0 && buf != '\n') continue; 
         break;

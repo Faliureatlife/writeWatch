@@ -1,14 +1,3 @@
-/*
-void run_comm(const char * comm, FILE* location){
-  pid_t pid = fork();
-  FILE* output = freopen(location);
-  if (output == NULL){
-    perror("No or unavailible output file");
-    exit(EXIT_FAILURE);
-  }
-  //use sh to execute our command 
-  execlp("sh", "sh", "-c", comm, NULL);
-}*/
 //
                                                               // using (*fds)[2] which is pointer to array of two pollfd
                                                               // if i used *fds[2] it would be array to two pointers  
