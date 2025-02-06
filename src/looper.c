@@ -1,0 +1,53 @@
+#include "opts.c"
+                                                        //,const char* COMMAND
+void handle_events(int fd, int *wd, int argc, char *argv[]){
+  //need to ensure that the buffer is aligned 
+  char buf[4096] __attribute__((aligned(__alignof__(struct inotify_event))));
+  const struct inotify_event *event;
+  ssize_t len;
+
+  //read all file descriptors
+  for(;;) {
+    len = read(fd,buf,sizeof(buf));
+    if (len == -1 && errno != EAGAIN) {
+      perror("Error in read");
+      exit(EXIT_FAILURE);
+    }
+    
+    if (len <= 0) break;
+
+    for (char *ptr = buf; ptr < buf + len; ptr += sizeof(struct inotify_event) + event->len) {
+      event = (const struct inotify_event*) ptr;
+
+      if (event->mask & IN_MODIFY) 
+        printf("IN_MODIFY\n");
+      if (event->mask & IN_CLOSE_NOWRITE)
+        printf("IN_CLOSE\n");
+      if (event->mask & IN_CLOSE_WRITE)
+        printf("IN_CLOSE_WRITE\n");
+      if (event->mask & IN_MOVED_TO)
+        printf("IN_MOVED_TO\n");
+      if (event->mask & IN_MOVED_FROM)
+        printf("IN_MOVED_FROM\n");
+      if (event->mask & IN_OPEN)
+        printf("IN_OPEN\n");
+
+      for (size_t i = 1; i < argc; ++i) {
+        if (wd[i] == event->wd) {
+          printf("%s/n", argv[i]);
+          break;
+        }
+      }
+
+      //event_len only exists if it has a name
+      if(event->len)
+        printf("%s", event->name);
+
+      if(event->mask & IN_ISDIR)
+        printf(" [directory]\n");
+      else 
+        printf(" [file]\n\n");
+
+    }
+  }
+}

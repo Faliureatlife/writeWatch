@@ -6,61 +6,8 @@
 #include <poll.h>
 #include <unistd.h>
 
-void exec_code(FILE* handle, const char* command){
-
-}
-                                                        //,const char* COMMAND
-void handle_events(int fd, int *wd, int argc, char *argv[]){
-  //need to ensure that the buffer is aligned 
-  char buf[4096] __attribute__((aligned(__alignof__(struct inotify_event))));
-  const struct inotify_event *event;
-  ssize_t len;
-
-  //read all file descriptors
-  for(;;) {
-    len = read(fd,buf,sizeof(buf));
-    if (len == -1 && errno != EAGAIN) {
-      perror("Error in read");
-      exit(EXIT_FAILURE);
-    }
-    
-    if (len <= 0) break;
-
-    for (char *ptr = buf; ptr < buf + len; ptr += sizeof(struct inotify_event) + event->len) {
-      event = (const struct inotify_event*) ptr;
-
-      if (event->mask & IN_MODIFY) 
-        printf("IN_MODIFY\n");
-      if (event->mask & IN_CLOSE_NOWRITE)
-        printf("IN_CLOSE\n");
-      if (event->mask & IN_CLOSE_WRITE)
-        printf("IN_CLOSE_WRITE\n");
-      if (event->mask & IN_MOVED_TO)
-        printf("IN_MOVED_TO\n");
-      if (event->mask & IN_MOVED_FROM)
-        printf("IN_MOVED_FROM\n");
-      if (event->mask & IN_OPEN)
-        printf("IN_OPEN\n");
-
-      for (size_t i = 1; i < argc; ++i) {
-        if (wd[i] == event->wd) {
-          printf("%s/n", argv[i]);
-          break;
-        }
-      }
-
-      //event_len only exists if it has a name
-      if(event->len)
-        printf("%s", event->name);
-
-      if(event->mask & IN_ISDIR)
-        printf(" [directory]\n");
-      else 
-        printf(" [file]\n\n");
-
-    }
-  }
-}
+#include "looper.c"
+#include "init.c"
 
 int main(int argc, char *argv[]){
   char buf;
@@ -77,40 +24,45 @@ int main(int argc, char *argv[]){
     exit(EXIT_FAILURE);
   }
 
-  //create file descriptor and ensure successful creation
-  fd = inotify_init1(IN_NONBLOCK);
-  if (fd == -1) {perror("Init error; inotify_inti1"); exit(EXIT_FAILURE);}
-
+  // handle_events(fd,wd,argc,argv);
   //calloc is like malloc but initialzies to 0 
   //allocates (argc * sizeof(int)) bytes;
   //allocating the watch descriptors
   wd = calloc(argc, sizeof(int));
   if (wd == NULL) {perror("Init error; calloc"); exit(EXIT_FAILURE);}
 
-  //add directories into the watch list
-  //we are watching for file close and for file modify
-  for (i = 1; i < argc; i++) {
-    //IN_MODIFY doesnt seem to really work for VIM
-    wd[i] = inotify_add_watch(fd, argv[i], IN_CLOSE | IN_MOVE);
-    //ensure add success
-    if(wd[i] == -1) {
-      perror("unable to add one or more files to watch");
-      exit(EXIT_FAILURE);
-    }
-  }
+  // *wd?
+  init_inotify(&argc, argv, &fd, &wd, &nfds, &fds);
+  printf("Listening for events on %s\nPress enter to stop watching \n\n", argv[1]);
+  //create file descriptor and ensure successful creation
+//fd = inotify_init1(IN_NONBLOCK);
+//if (fd == -1) {perror("Init error; inotify_inti1"); exit(EXIT_FAILURE);}
 
-  //rewrite to only bother reading the first into file
-  
-  //basically just a long int for some safety
-  nfds = 2;
 
-  fds[0].fd = STDIN_FILENO;
-  fds[0].events = POLLIN;
+////add directories into the watch list
+////we are watching for file close and for file modify
+//for (i = 1; i < argc; i++) {
+//  //IN_MODIFY doesnt seem to really work for VIM
+//  wd[i] = inotify_add_watch(fd, argv[i], IN_CLOSE | IN_MOVE);
+//  //ensure add success
+//  if(wd[i] == -1) {
+//    perror("unable to add one or more files to watch");
+//    exit(EXIT_FAILURE);
+//  }
+//}
 
-  fds[1].fd = fd;
-  fds[1].events = POLLIN;
+////rewrite to only bother reading the first into file
+//
+////basically just a long int for some safety
+//nfds = 2;
 
-  printf("Listening for events on %s", argv[1]);
+//fds[0].fd = STDIN_FILENO;
+//fds[0].events = POLLIN;
+
+//fds[1].fd = fd;
+//fds[1].events = POLLIN;
+
+//printf("Listening for events on %s\n", argv[1]);
   
   //loop section 
   for(;;) {
