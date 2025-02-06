@@ -26,7 +26,7 @@ int run_comm(const char* comm, FILE* location){
   } 
 }
 
-void handle_events(int fd, int *wd, int argc, char *argv[]){
+void handle_events(int fd, int *wd, int argc, char *argv[], int commpos){
   //need to ensure that the buffer is aligned 
   char buf[4096] __attribute__((aligned(__alignof__(struct inotify_event))));
   const struct inotify_event *event;
@@ -45,22 +45,28 @@ void handle_events(int fd, int *wd, int argc, char *argv[]){
     for (char *ptr = buf; ptr < buf + len; ptr += sizeof(struct inotify_event) + event->len) {
       event = (const struct inotify_event*) ptr;
 
-      if (event->mask & IN_MODIFY) 
-        printf("IN_MODIFY\n");
-      if (event->mask & IN_CLOSE_NOWRITE)
-        printf("IN_CLOSE\n");
+      //havent seen them be generated but also not watching
+      // if (event->mask & IN_MODIFY) 
+      //   printf("IN_MODIFY\n");
+      // if (event->mask & IN_OPEN)
+      //   printf("IN_OPEN\n");
+      // if (event->mask & IN_CLOSE_NOWRITE)
+      //   printf("IN_CLOSE_NOWRITE\n");
+
+      //only one the matters for (n)vim file writes
+      //i did change something in my init.lua so not sure if that has a bearing on it
       if (event->mask & IN_CLOSE_WRITE)
         printf("IN_CLOSE_WRITE\n");
+
+      //both watched for but not generated
       if (event->mask & IN_MOVED_TO)
         printf("IN_MOVED_TO\n");
       if (event->mask & IN_MOVED_FROM)
         printf("IN_MOVED_FROM\n");
-      if (event->mask & IN_OPEN)
-        printf("IN_OPEN\n");
 
       for (size_t i = 1; i < argc; ++i) {
         if (wd[i] == event->wd) {
-          printf("%s/n", argv[i]);
+          printf("%s/", argv[i]);
           break;
         }
       }

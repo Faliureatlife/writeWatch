@@ -4,3 +4,4 @@ Impl all things in --help
   -read and execute from file -f [FILE]
   -specify command to run -c [COMMAND]
   -parse makefile
+  -test inode generation for ed/vi/emacs/nano

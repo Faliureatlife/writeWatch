@@ -10,7 +10,6 @@
 #include "looper.c"
 #include "init.c"
 
-
 //FIND SOMEWHERE TO PUT THESE
 //stdout held in STDOUT_FILENO
 //returns old stdout
@@ -28,10 +27,9 @@ void restore_std(int stdoutNO){
   dup2(stdoutNO, STDOUT_FILENO);
 }
 
-
 int main(int argc, char *argv[]){
   char buf;
-  int fd, i, poll_num, fdo, old_std;
+  int fd, i, poll_num, fdo, old_std, commpos;
   int *wd;
   nfds_t nfds;
   struct pollfd fds[2];
@@ -59,8 +57,13 @@ int main(int argc, char *argv[]){
 
   //parsing arguments
   for (int i = 0; i < argc; i++){
-    if (!strcmp("-f",argv[i]))
+    if (!strcmp("-o",argv[i]))
       old_std = redirect_output(fdo = open(argv[i+1], O_WRONLY | O_APPEND | O_CREAT,0644));
+    if (!strcmp("-f",argv[i]))
+    if (!strcmp("-c",argv[i]))
+      commpos = i + 1;
+    if (!strcmp("-d",argv[i]))
+      old_std = redirect_output(open("/dev/null", O_APPEND));
   }
 
   //loop section 
@@ -82,7 +85,7 @@ int main(int argc, char *argv[]){
         break;
       }
       if (fds[1].revents & POLLIN) {
-        handle_events(fd,wd,argc,argv);
+        handle_events(fd,wd,argc,argv,commpos);
       }
     }
   }
