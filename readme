@@ -1,2 +1,0 @@
-Usage:
-    The [FILE] that is being watched can be either a directory or a file. Depending on text editor the FILE that is being modifiied can be watched directly, however it is reccomended to have all files of interest held within a /src/ directory that is watched. Usage of makefiles in order to manage compilation details is reccomended.
