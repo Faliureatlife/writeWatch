@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 Impl all things in --help
   -daemonize and output into specified file -o [FILE]
   -daemonize and output to /dev/null -d 
   -read and execute from file -f [FILE]
   -specify command to run -c [COMMAND]
   -parse makefile
-=======
-Implement all features in readme:
-	-execute specified command
-	-if no command specify output
-	-specify log file
-	-specify command file
-	-update readme instructions
->>>>>>> ceefa34 (parity for lost commits)
