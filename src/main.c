@@ -1,11 +1,17 @@
 #include <errno.h>
 #include <stdio.h>
 #include <sys/inotify.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <syslog.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <poll.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <signal.h>
+
 
 #include "looper.c"
 #include "init.c"
@@ -52,9 +58,7 @@ int main(int argc, char *argv[]){
   //for some reason I'm unsure about using &
   init_inotify(&argc, argv, &fd, &wd, &nfds, &fds);
   printf("Listening for events on %s\nPress enter to stop watching \n\n", argv[1]);
-  //create file descriptor and ensure successful creation
   
-
   //parsing arguments
   for (int i = 0; i < argc; i++){
     if (!strcmp("-o",argv[i]))
@@ -62,8 +66,17 @@ int main(int argc, char *argv[]){
     if (!strcmp("-f",argv[i]))
     if (!strcmp("-c",argv[i]))
       commpos = i + 1;
-    if (!strcmp("-d",argv[i]))
-      old_std = redirect_output(open("/dev/null", O_APPEND));
+    if (!strcmp("-d",argv[i])) {
+      fprintf(stderr, "boogidie boogidie boo");
+      daemonize("/dev/null");
+      store_pid();
+    }
+  }
+
+  //not sure if this should go here or in the loop
+  if (signal(SIGTERM,sig_handler) == SIG_ERR){
+    syslog(LOG_ERR, "Can't catch SIGTERM");
+    exit(EXIT_FAILURE);
   }
 
   //loop section 
