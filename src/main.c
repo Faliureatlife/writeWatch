@@ -44,11 +44,10 @@ int main(int argc, char *argv[]){
   fprintf(stderr, "%s\n",argv[0]);
 
   if (argc < 2) {
-    printf("Usage: %s [FILE] PATH [OPTION]\nArgs:\n\t -c COMMAND\n\n\t -f FILE: Execute command stored in file\n\n\t -o FILE: Choose file to display information out to, stdout by default\n\n\t -d: Daemonize the instance\n\n\t --help: Display this message\n", argv[0]);
+    printf("Usage: %s [FILE] PATH [OPTION]\nArgs:\n\t -c COMMAND\n\n\t -f FILE: Execute command stored in file\n\n\t -o FILE: Choose file to display information out to, stdout by default\n\n\t -d: Daemonize the instance\n\n\t --help: Display this message\n\nBy default the results of commands will be piped into $PWD/commandlog.txt", argv[0]);
     exit(EXIT_FAILURE);
   }
 
-  // handle_events(fd,wd,argc,argv);
   //calloc is like malloc but initialzies to 0 
   //allocates (argc * sizeof(int)) bytes;
   //allocating the watch descriptors
@@ -56,18 +55,20 @@ int main(int argc, char *argv[]){
   if (wd == NULL) {perror("Init error; calloc"); exit(EXIT_FAILURE);}
 
   //for some reason I'm unsure about using &
-  init_inotify(&argc, argv, &fd, &wd, &nfds, &fds);
+  init_inotify(&argc,argv, &fd, &wd, &nfds, &fds);
   printf("Listening for events on %s\nPress enter to stop watching \n\n", argv[1]);
-  
+
   //parsing arguments
   for (int i = 0; i < argc; i++){
     if (!strcmp("-o",argv[i]))
       old_std = redirect_output(fdo = open(argv[i+1], O_WRONLY | O_APPEND | O_CREAT,0644));
-    if (!strcmp("-f",argv[i]))
+
+    // if (!strcmp("-f",argv[i]))
+    //
     if (!strcmp("-c",argv[i]))
       commpos = i + 1;
+
     if (!strcmp("-d",argv[i])) {
-      fprintf(stderr, "boogidie boogidie boo");
       daemonize("/dev/null");
       store_pid();
     }
@@ -102,7 +103,6 @@ int main(int argc, char *argv[]){
       }
     }
   }
-  
 
   //free up memory and handles
   restore_std(old_std);

@@ -1,0 +1,8 @@
+IN_CLOSE_WRITE
+src/main.c [file]
+
+calling ./watcher at position 0 
+IN_CLOSE_WRITE
+src/main.c [file]
+
+calling ./watcher at position 0 

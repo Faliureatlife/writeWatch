@@ -1,0 +1,11 @@
+.DS_Store
+.DS_Store?
+._
+.Trashes
+.vs
+a.out
+x64
+CppProperties.json
+?.vcxpr
+?.sln
+

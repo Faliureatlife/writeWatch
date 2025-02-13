@@ -1,10 +1,11 @@
 #include <sys/wait.h>
 
-int run_comm(const char* comm, FILE* location){
+int run_comm(const char* comm, const char * location){
+  printf("command function running:%s \n", comm);
   pid_t pid = fork();
   if (pid == 0) {
     FILE* output;
-       // output = freopen(location ,"w", stdout);
+    output = freopen(location ,"w+", stdout);
 
     if (output == NULL){
       perror("No or unavailible output file");
@@ -44,15 +45,7 @@ void handle_events(int fd, int *wd, int argc, char *argv[], int commpos){
 
     for (char *ptr = buf; ptr < buf + len; ptr += sizeof(struct inotify_event) + event->len) {
       event = (const struct inotify_event*) ptr;
-
-      //havent seen them be generated but also not watching
-      // if (event->mask & IN_MODIFY) 
-      //   printf("IN_MODIFY\n");
-      // if (event->mask & IN_OPEN)
-      //   printf("IN_OPEN\n");
-      // if (event->mask & IN_CLOSE_NOWRITE)
-      //   printf("IN_CLOSE_NOWRITE\n");
-
+      
       //only one the matters for (n)vim file writes
       //i did change something in my init.lua so not sure if that has a bearing on it
       if (event->mask & IN_CLOSE_WRITE)
@@ -79,7 +72,10 @@ void handle_events(int fd, int *wd, int argc, char *argv[], int commpos){
         printf(" [directory]\n");
       else 
         printf(" [file]\n\n");
+    }
 
+    if (commpos > 0) {
+      run_comm(argv[commpos],"commandlog.txt");
     }
   }
 }
