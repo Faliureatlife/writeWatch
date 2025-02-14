@@ -12,7 +12,6 @@
 #include <fcntl.h>
 #include <signal.h>
 
-
 #include "looper.c"
 #include "init.c"
 
@@ -51,7 +50,7 @@ int main(int argc, char *argv[]){
   //calloc is like malloc but initialzies to 0 
   //allocates (argc * sizeof(int)) bytes;
   //allocating the watch descriptors
-  wd = calloc(argc, sizeof(int));
+  wd = calloc(argc, sizeof *wd);
   if (wd == NULL) {perror("Init error; calloc"); exit(EXIT_FAILURE);}
 
   //for some reason I'm unsure about using &

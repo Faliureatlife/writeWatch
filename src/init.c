@@ -43,8 +43,6 @@ void store_pid() {
   close(fd);
 }
 
-
-
 void daemonize(const char *outDir){
   pid_t pid;
 
